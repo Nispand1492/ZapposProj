@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import jdk.nashorn.internal.parser.JSONParser;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,16 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import sun.net.www.protocol.http.HttpURLConnection;
+@Controller
+public class HelloController {
  
-public class HelloController extends AbstractController{
- 
-	@RequestMapping(value = "get_data.html" , method = RequestMethod.GET)
+	@RequestMapping(value = "/get_data.html" , method = RequestMethod.GET)
 	protected ModelAndView get_data(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		ModelAndView modelandview = new ModelAndView("getdata");
 		modelandview.addObject("welcomeMessage","Enter Location Zip Code of any US city" );
 		return modelandview;
 	}
-	@RequestMapping(value = "welcome.html" , method = RequestMethod.POST)
+	@RequestMapping(value = "/welcome.html" , method = RequestMethod.POST)
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 		HttpServletResponse response ,@RequestParam Map<String,String> reqPar) throws Exception {
 		String zip = reqPar.get("zipcode");
@@ -66,11 +67,5 @@ public class HelloController extends AbstractController{
 		modelandview.addObject("welcomeMessage",output );
 		
 		return modelandview;
-	}
-	@Override
-	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
